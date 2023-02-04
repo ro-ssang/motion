@@ -1,0 +1,1 @@
+document.write('Start Project with TypeScript!');
