@@ -10,11 +10,14 @@ Toy project using TypeScript.
     git clone https://github.com/ro-ssang/motion.git
     ```
 
-2. Start Project
+2. Install Packages
 
     ```sh
-    tsc -w
+    npm install
     ```
 
-3. Open `index.html` file.
+## 시작하기
 
+```sh
+npm run start
+```
