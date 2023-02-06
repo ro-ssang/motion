@@ -1,3 +1,4 @@
+import MotionNode from '@common/MotionNode';
 import MotionComponent from '@components/common/MotionComponent';
 import { MotionTagAttribute } from '@customTypes/MotionTag';
 
@@ -5,9 +6,9 @@ class MotionDOM {
   public static createElement(
     tagName: string,
     tagAttributes?: MotionTagAttribute[],
-    children?: MotionComponent
-  ): MotionComponent {
-    return new MotionComponent(tagName, tagAttributes, children);
+    children?: MotionNode[]
+  ): MotionNode {
+    return new MotionNode(tagName, tagAttributes, children);
   }
 
   public static renderDOM(rootElementSelector: string, motionComponent: MotionComponent): void {
@@ -15,7 +16,12 @@ class MotionDOM {
     if (!rootElement) {
       throw new Error(`Can not find root element! Please check root id again.`);
     }
-    rootElement.appendChild(motionComponent.render());
+
+    const motionNodes = motionComponent.render();
+    motionNodes.forEach((motionNode) => {
+      const element = motionNode.createElementTree();
+      rootElement.appendChild(element);
+    });
   }
 }
 
