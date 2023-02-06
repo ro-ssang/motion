@@ -4,7 +4,7 @@ class MotionComponent {
   public constructor(
     private tagName: string,
     private tagAttributes?: MotionTagAttribute[],
-    public children?: MotionComponent
+    public children?: MotionComponent[]
   ) {}
 
   public render(): HTMLElement {
@@ -12,8 +12,8 @@ class MotionComponent {
     if (this.tagAttributes && this.tagAttributes.length > 0) {
       this.tagAttributes.forEach(([attrName, attrValue]) => element.setAttribute(attrName, attrValue));
     }
-    if (this.children) {
-      element.appendChild(this.children.render());
+    if (this.children && this.children.length > 0) {
+      this.children.forEach((child) => element.appendChild(child.render()));
     }
     return element;
   }
