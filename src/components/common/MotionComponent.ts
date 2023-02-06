@@ -1,22 +1,9 @@
-import { MotionTagAttribute } from '@customTypes/MotionTag';
+import MotionNode from 'src/common/MotionNode';
 
-class MotionComponent {
-  public constructor(
-    private tagName: string,
-    private tagAttributes?: MotionTagAttribute[],
-    public children?: MotionComponent[]
-  ) {}
+abstract class MotionComponent {
+  public constructor(public children?: MotionComponent[]) {}
 
-  public render(): HTMLElement {
-    const element = document.createElement(this.tagName);
-    if (this.tagAttributes && this.tagAttributes.length > 0) {
-      this.tagAttributes.forEach(([attrName, attrValue]) => element.setAttribute(attrName, attrValue));
-    }
-    if (this.children && this.children.length > 0) {
-      this.children.forEach((child) => element.appendChild(child.render()));
-    }
-    return element;
-  }
+  public abstract render(): MotionNode[];
 }
 
 export default MotionComponent;
